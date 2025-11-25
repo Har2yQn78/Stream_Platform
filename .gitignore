@@ -31,3 +31,4 @@ pkg/
 # ignore edit files
 .*~
 .*.sw?
+.env
