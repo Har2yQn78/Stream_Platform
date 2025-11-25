@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/v2/mongo"
 	"go.mongodb.org/mongo-driver/v2/mongo/options"
 )
@@ -28,7 +29,7 @@ func DBInstance() *mongo.Client {
 	client, err := mongo.Connect(clientOptions)
 
 	if err != nil {
-		return err
+		return nil
 	}
 
 	return client
