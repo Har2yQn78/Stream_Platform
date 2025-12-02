@@ -50,7 +50,7 @@ func GetMovieById() gin.HandlerFunc {
 		}
 		var movie models.Movie
 
-		err := movieCollection.FindOne(ctx, bson.M{"_id": movieID}).Decode(&movie)
+		err := movieCollection.FindOne(ctx, bson.M{"imdb_id": movieID}).Decode(&movie)
 
 		if err != nil {
 			c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
