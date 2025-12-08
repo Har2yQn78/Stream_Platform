@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	controller "github.com/Har2yQn78/Stream_Platform/controllers"
+	"github.com/Har2yQn78/Stream_Platform/database"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,6 +18,7 @@ func main() {
 	router.GET("/movie/:imdb_id", controller.GetMovieById())
 	router.POST("/addmovie", controller.AddMovie())
 	router.POST("register", controller.RegisterUser())
+	router.POST("/login", controller.LoginUser(database.Client))
 
 	if err := router.Run(":8080"); err != nil {
 		panic(err)
