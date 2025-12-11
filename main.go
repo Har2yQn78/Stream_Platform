@@ -3,8 +3,7 @@ package main
 import (
 	"net/http"
 
-	controller "github.com/Har2yQn78/Stream_Platform/controllers"
-	"github.com/Har2yQn78/Stream_Platform/database"
+	"github.com/Har2yQn78/Stream_Platform/routes"
 	"github.com/gin-gonic/gin"
 )
 
@@ -14,11 +13,10 @@ func main() {
 	router.GET("/hello", func(c *gin.Context) {
 		c.String(http.StatusOK, "Hello World")
 	})
-	router.GET("/movies", controller.GetMovies())
-	router.GET("/movie/:imdb_id", controller.GetMovieById())
-	router.POST("/addmovie", controller.AddMovie())
-	router.POST("register", controller.RegisterUser())
-	router.POST("/login", controller.LoginUser(database.Client))
+
+	routes.SetupUnProtectedRoutes(router)
+
+	routes.SetupProtectedRoutes(router)
 
 	if err := router.Run(":8080"); err != nil {
 		panic(err)
