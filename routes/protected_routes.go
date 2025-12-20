@@ -15,5 +15,11 @@ func SetupProtectedRoutes(router *gin.Engine) {
 		protected.PUT("/movie/:imdb_id/review/:review_id", controller.UpdateReview())
 		protected.DELETE("/movie/:imdb_id/review/:review_id", controller.DeleteReview())
 		protected.POST("/movie/:imdb_id/rating", controller.AddRating())
+
+		protected.POST("/media", controller.AddMedia())
+		protected.POST("/media/:tmdb_id/review", controller.AddMediaReview())
+		protected.POST("/media/:tmdb_id/comment", controller.AddMediaComment())
+		protected.DELETE("/media/:tmdb_id/comment/:comment_id", controller.DeleteMediaComment())
+		protected.POST("/media/:tmdb_id/rating", controller.AddMediaRating())
 	}
 }

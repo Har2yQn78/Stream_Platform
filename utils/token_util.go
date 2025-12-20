@@ -22,8 +22,13 @@ type SingedDetails struct {
 	jwt.RegisteredClaims
 }
 
-var SECRET_KEY string = os.Getenv("SECRET_KEY")
-var SECRET_REFRESH_KEY string = os.Getenv("SECRET_REFRESH_KEY")
+func getSecretKey() string {
+	return os.Getenv("SECRET_KEY")
+}
+
+func getRefreshSecretKey() string {
+	return os.Getenv("SECRET_REFRESH_KEY")
+}
 
 func GenerateAllTokens(email, firstName, lastName, role, userId string) (string, string, error) {
 	claims := &SingedDetails{
@@ -39,7 +44,7 @@ func GenerateAllTokens(email, firstName, lastName, role, userId string) (string,
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	signedToken, err := token.SignedString([]byte(SECRET_KEY))
+	signedToken, err := token.SignedString([]byte(getSecretKey()))
 
 	if err != nil {
 		return "", "", err
@@ -58,7 +63,7 @@ func GenerateAllTokens(email, firstName, lastName, role, userId string) (string,
 		},
 	}
 	refreshToken := jwt.NewWithClaims(jwt.SigningMethodHS256, refreshClaims)
-	signedRefreshToken, err := refreshToken.SignedString([]byte(SECRET_REFRESH_KEY))
+	signedRefreshToken, err := refreshToken.SignedString([]byte(getRefreshSecretKey()))
 
 	if err != nil {
 		return "", "", err
@@ -108,7 +113,7 @@ func ValidateToken(tokenString string) (*SingedDetails, error) {
 	claims := &SingedDetails{}
 
 	token, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
-		return []byte(SECRET_KEY), nil
+		return []byte(getSecretKey()), nil
 	})
 	if err != nil {
 		return nil, err

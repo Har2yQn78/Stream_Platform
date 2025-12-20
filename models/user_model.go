@@ -15,7 +15,7 @@ type User struct {
 	Password        string        `json:"password" bson:"password" validate:"required,min=6"`
 	Role            string        `json:"role" bson:"role" validate:"oneof=ADMIN USER"`
 	CreatedAt       time.Time     `json:"created_at" bson:"created_at"`
-	UpdatedAt       time.Time     `json:"update_at" bson:"update_at"`
+	UpdatedAt       time.Time     `json:"updated_at" bson:"updated_at"`
 	Token           string        `json:"token" bson:"token"`
 	RefreshToken    string        `json:"refresh_token" bson:"refresh_token"`
 	FavouriteGenres []Genre       `json:"favourite_genres" bson:"favourite_genres" validate:"required,dive"`

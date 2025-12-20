@@ -121,6 +121,7 @@ func LoginUser(client *mongo.Client) gin.HandlerFunc {
 			UserId:          foundUser.UserID,
 			FirstName:       foundUser.FirstName,
 			LastName:        foundUser.LastName,
+			Email:           foundUser.Email,
 			Role:            foundUser.Role,
 			Token:           token,
 			RefreshToken:    refreshToken,
